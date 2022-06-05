@@ -1,0 +1,46 @@
+void setZeros(vector<vector<int>> &matrix)
+{
+	// Write your code here.
+    
+    int m=matrix.size();
+    int n=matrix[0].size();
+    vector<vector<int>> temp(m,vector<int>(n,-1));
+    for(int i=0;i<m;i++)
+    {
+        bool rowd=false;
+        for(int j=0;j<n;j++)
+        {
+            if(matrix[i][j]==0)
+            {
+               if(!rowd)
+               {
+                   for(int k=0;k<n;k++)
+                   {
+                       temp[i][k]=0;
+                   }
+                   rowd=true;
+               }
+                for(int k=0;k<m;k++)
+                {
+                    temp[k][j]=0;
+                }
+            }
+        }
+    }
+    for(int i=0;i<m;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            if(temp[i][j]==0)
+            {
+                matrix[i][j]=0;
+            }
+        }
+    }
+}
+
+
+
+
+
+//This code time complexity is o(m*n) and space complexity is o(m*n) which can be reduced by using indicator in row 1st row and 1st col
