@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+int maximumProfit(vector<int> &prices){
+    // Write your code here.
+    int mi=INT_MAX;
+    int ma=INT_MIN;
+    int ans=INT_MIN;
+    for(int i=0;i<prices.size();i++)
+    {
+        if(prices[i]<mi)
+        {
+            mi=prices[i];
+            ma=prices[i];
+            ans=max(ans,(ma-mi));
+        }
+        else if(prices[i]>ma)
+        {
+            ma=prices[i];
+            ans=max(ans,(ma-mi));
+        }
+    }
+    return ans;
+}
+
+//here we simply keep track of min and max 
+
+optimization      ------------>>>>>>
+-------------------------------------
+//we can avoid using max here we can simply use min and profit because we keep track of min and difference of min and current element.
