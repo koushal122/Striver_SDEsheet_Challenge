@@ -1,0 +1,46 @@
+#include <bits/stdc++.h> 
+
+void rotateMatrix(vector<vector<int>> &mat, int n, int m)
+{
+    // Write your code here
+    int nt=min(n/2,m/2);
+    int st=0;
+    int ren=n;
+    int cen=m;
+    for(int t=0;t<nt;t++)
+    {
+        int res=mat[st+1][st];
+        for(int i=st;i<cen;i++)
+        {
+            int temp=res;
+            res=mat[st][i];
+            mat[st][i]=temp;
+        }
+        for(int i=st+1;i<ren;i++)
+        {
+            int temp=res;
+            res=mat[i][cen-1];
+            mat[i][cen-1]=temp;
+        }
+        for(int i=cen-2;i>=st;i--)
+        {
+            int temp=res;
+            res=mat[ren-1][i];
+            mat[ren-1][i]=temp;
+        }
+        for(int i=ren-2;i>=st;i--)
+        {
+            int temp=res;
+            res=mat[i][st];
+            mat[i][st]=temp;
+        }
+        st++;
+        ren--;
+        cen--;
+    }
+}
+
+
+
+//idea is rotate whole row and column once
+and move to next row and column
