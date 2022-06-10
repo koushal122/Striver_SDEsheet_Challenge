@@ -1,0 +1,26 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int modularExponentiation(int x, int n, int m) {
+        // Write your code here.    
+        if(n==1)
+        {
+            return x%m;
+        }
+        if(n==0)
+            return 1;
+        long y;
+        if(n%2==0)
+        {
+            int tn=n/2;
+            y=modularExponentiation(x,tn,m)%m;
+            y=(y*y)%m;
+        }
+        else {
+            y=x%m;
+            int ans=modularExponentiation(x,n-1,m);
+            y=(y*ans%m)%m;
+        }
+        return (int)((y ) % m);
+    }
+}
