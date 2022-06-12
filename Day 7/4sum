@@ -1,0 +1,52 @@
+class Solution {
+    public List<List<Integer>> fourSum(int[] arr, int target) {
+      Arrays.sort(arr);
+        List<List<Integer>> ans=new ArrayList<>();
+      int i=0;
+      int j;
+      int n=arr.length;
+      while(i<n)
+      {
+          j=i+1;
+          while(j<n)
+          {
+              int rem=target-(arr[i]+arr[j]);
+              int f=j+1;
+              int r=n-1;
+              while(f<r)
+              {
+                  if(arr[f]+arr[r]<rem)
+                  {
+                   f++;   
+                  }
+                  else if(arr[f]+arr[r]>rem)
+                  {
+                      r--;
+                  }
+                  else{
+                      List<Integer> temp=new ArrayList<>();
+                      temp.add(arr[i]);
+                      temp.add(arr[j]);
+                      temp.add(arr[f]);
+                      temp.add(arr[r]);
+                      ans.add(temp);
+                      while(f<r&&arr[f+1]==arr[f])
+                          f++;
+                      while(f<r&&arr[r-1]==arr[r])
+                          r--;
+                      f++;
+                      r--;
+                  }
+              }
+              while(j<n-1&&arr[j+1]==arr[j])
+                  j++;
+              j++;
+              
+          }
+          while(i<n-1&&arr[i+1]==arr[i])
+              i++;
+          i++;
+      }
+        return ans;
+    }
+}
