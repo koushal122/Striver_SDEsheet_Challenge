@@ -1,0 +1,54 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution{
+    public static int[][] pairSum(int[] arr, int s) {
+        // Write your code here.
+        Arrays.sort(arr);
+        ArrayList<ArrayList<Integer>> a=new ArrayList<ArrayList<Integer>>();
+        Map<Integer,Integer> m=new HashMap<>();
+        for(int i=0;i<arr.length;i++)
+        {
+            if(m.containsKey(arr[i]))
+            {
+                int val=m.get(arr[i]);
+                val++;
+                m.put(arr[i],val);
+            }
+            else{
+                m.put(arr[i],1);
+            }
+        }
+        for(int i=0;i<arr.length;i++)
+        {
+            int rem=s-arr[i];
+            int val=m.get(arr[i]);
+                    val--;
+                    if(val==0)
+                        m.remove(arr[i]);
+                    else m.put(arr[i],val);
+            if(m.containsKey(rem))
+            {
+                int nt=m.get(rem);
+                if(nt!=0){
+                for(int ind=0;ind<nt;ind++)
+                {
+                    ArrayList<Integer> temp=new ArrayList<Integer>();
+                    temp.add(arr[i]);
+                    temp.add(rem);
+                    a.add(temp);
+                }
+                  
+                    
+                }
+            }
+        }
+        int ans[][]=new int[a.size()][2];
+        for(int i=0;i<a.size();i++)
+        {
+            ans[i][0]=a.get(i).get(0);
+            ans[i][1]=a.get(i).get(1);
+        }
+        return ans;
+        
+    }
+}
