@@ -1,0 +1,31 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int lengthOfLongestConsecutiveSequence(int[] arr, int N) {
+        // Write your code here.
+        HashSet<Integer> m=new HashSet<>();
+        for(int i=0;i<N;i++)
+        {
+            m.add(arr[i]);
+        }
+        int mc=0;
+        for(int i=0;i<N;i++)
+        {
+            int cnt=0;
+            if(m.contains(arr[i]-1))
+                continue;
+            else{
+                int num=arr[i];
+                while(m.contains(num))
+                {
+                    cnt++;
+                    num++;
+                }
+            }
+            mc=Math.max(mc,cnt);
+        }
+        return mc;
+    }
+}
+
+//approach is used hashset and everytime we always start with least number and increase the count.
