@@ -1,0 +1,107 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the linked list node structure:
+    
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+
+        public LinkedListNode(T data) {
+            this.data = data;
+        }
+    }
+
+************************************************************/
+
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+		// Write your code here.
+        LinkedListNode<Integer> ans=null;
+        LinkedListNode<Integer> t1=first;
+        LinkedListNode<Integer> t2=second;
+        LinkedListNode<Integer> tn1=null;
+        while(t1!=null&&t2!=null)
+        {
+            if(t1.data<t2.data)
+            {
+                LinkedListNode<Integer> temp=new LinkedListNode<>(t1.data);
+                t1=t1.next;
+                if(ans==null)
+                {
+                    ans=temp;
+                    tn1=ans;
+                }
+                else{
+                    tn1.next=temp;
+                    tn1=tn1.next;
+                }
+                
+            }
+            else if(t1.data>t2.data)
+            {
+                LinkedListNode<Integer> temp=new LinkedListNode<>(t2.data);
+                t2=t2.next;
+                if(ans==null)
+                {
+                    ans=temp;
+                    tn1=ans;
+                }
+                else{
+                    tn1.next=temp;
+                    tn1=tn1.next;
+                }
+            }
+            else{
+                LinkedListNode<Integer> temp1=new LinkedListNode<>(t1.data);
+                LinkedListNode<Integer> temp2=new LinkedListNode<>(t1.data);
+                t1=t1.next;
+                t2=t2.next;
+                if(ans==null)
+                {
+                    ans=temp1;
+                    tn1=ans;
+                    tn1.next=temp2;
+                    tn1=tn1.next;
+                }
+                else{
+                    tn1.next=temp1;
+                    tn1=tn1.next;
+                    tn1.next=temp2;
+                    tn1=tn1.next;
+                }
+                
+            }
+        }
+        while(t1!=null)
+        {
+            LinkedListNode<Integer> temp=new LinkedListNode<>(t1.data);
+                t1=t1.next;
+                if(ans==null)
+                {
+                    ans=temp;
+                    tn1=ans;
+                }
+                else{
+                    tn1.next=temp;
+                    tn1=tn1.next;
+                }
+        }
+        while(t2!=null)
+        {
+            LinkedListNode<Integer> temp=new LinkedListNode<>(t2.data);
+                t2=t2.next;
+                if(ans==null)
+                {
+                    ans=temp;
+                    tn1=ans;
+                }
+                else{
+                    tn1.next=temp;
+                    tn1=tn1.next;
+                }
+        }
+        return ans;
+	}
+}
