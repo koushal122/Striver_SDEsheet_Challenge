@@ -1,0 +1,36 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+	public static int subarraysXor(ArrayList<Integer> arr, int x) {
+		// Write your code here.
+        int cnt=0;
+        int xr=0;
+        HashMap<Integer,Integer> m=new HashMap<>();
+        for(int i=0;i<arr.size();i++)
+        {
+            xr=xr^arr.get(i);
+            if(xr==x)
+            {
+                cnt++;
+            }
+            int y=xr^x;
+            if(m.containsKey(y))
+            {
+                cnt+=m.get(y);
+            }
+            if(m.containsKey(xr))
+            {
+                m.put(xr,m.get(xr)+1);
+            }
+            else{
+                m.put(xr,1);
+            }
+        }
+        return cnt;
+        
+	}
+}
+
+//must understand prooerly
