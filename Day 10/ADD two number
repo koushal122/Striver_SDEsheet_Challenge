@@ -1,0 +1,88 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+    class LinkedListNode {
+        int data;
+        LinkedListNode next;
+        
+        public LinkedListNode(int data) {
+            this.data = data;
+        }
+    }
+
+*****************************************************************/
+
+
+public class Solution {
+    static LinkedListNode addTwoNumbers(LinkedListNode head1, LinkedListNode head2) {
+        // Write your code here.
+        int car=0;
+        LinkedListNode t1=head1;
+        LinkedListNode t2=head2;
+        LinkedListNode ans=null;
+        LinkedListNode cur=null;
+        while(t1!=null&&t2!=null)
+        {
+            int res=t1.data+t2.data+car;
+            car=res/10;
+            LinkedListNode temp=new LinkedListNode(res%10);
+            if(ans==null){
+                ans=temp;
+                cur=ans;
+            }
+            else{
+                cur.next=temp;
+                cur=cur.next;
+            }
+            t1=t1.next;
+            t2=t2.next;
+         }
+        while(t1!=null)
+        {
+            int res=t1.data+car;
+            car=res/10;
+            LinkedListNode temp=new LinkedListNode(res%10);
+            if(ans==null){
+                ans=temp;
+                cur=ans;
+            }
+            else{
+                cur.next=temp;
+                cur=cur.next;
+            }
+            t1=t1.next;
+        }
+        while(t2!=null)
+        {
+            int res=t2.data+car;
+            car=res/10;
+            LinkedListNode temp=new LinkedListNode(res%10);
+            if(ans==null){
+                ans=temp;
+                cur=ans;
+            }
+            else{
+                cur.next=temp;
+                cur=cur.next;
+            }
+            t2=t2.next;
+        }
+        if(car==0)
+            return ans;
+        else{
+            LinkedListNode temp=new LinkedListNode(car);
+            if(ans==null){
+                ans=temp;
+                cur=ans;
+            }
+            else{
+                cur.next=temp;
+                cur=cur.next;
+            }
+            return ans;
+        }
+    }
+}
