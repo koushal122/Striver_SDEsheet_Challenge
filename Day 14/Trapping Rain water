@@ -1,0 +1,37 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static long getTrappedWater(long[] h, int n) {
+        long cnt=0;
+        long lm=0;
+        long rm=0;
+        int lo=0;
+        int hi=h.length-1;
+        while(lo<hi)
+        {
+            if(h[lo]<=h[hi])
+            {
+                if(h[lo]>=lm)
+                {
+                    lm=h[lo];
+                }
+                else{
+                    cnt+=(lm-h[lo]);
+                }
+                lo++;
+            }
+            else{
+                if(h[hi]>=rm)
+                {
+                    rm=h[hi];
+                }
+                else{
+                    cnt+=(rm-h[hi]);
+                }
+                hi--;
+            }
+            
+        }
+        return cnt;
+    }
+}
