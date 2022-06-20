@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Solution {
+    public static List<Integer> maximumMeetings(int[] start, int[] end) {        
+        //Write your code here
+        ArrayList<ArrayList<Integer>> ar=new ArrayList<>();
+        List<Integer> ans=new ArrayList<>();
+        for(int i=0;i<start.length;i++)
+        {
+            ArrayList<Integer> a=new ArrayList<>();
+            a.add(start[i]);
+            a.add(end[i]);
+            a.add(i+1);
+            ar.add(a);
+        }
+        Collections.sort(ar,(a,b)->a.get(1).compareTo(b.get(1)));
+        int en=ar.get(0).get(1);
+        ans.add(ar.get(0).get(2));
+        for(int i=1;i<ar.size();i++)
+        {
+            if(ar.get(i).get(0)>en)
+            {
+                ans.add(ar.get(i).get(2));
+                en=ar.get(i).get(1);
+            }
+        }
+        return ans;
+        
+    }
+}
