@@ -1,0 +1,21 @@
+
+void fun(string s,vector<string> &ans,int ind)
+{
+    if(ind>=s.size())
+    {
+        ans.push_back(s);
+        return;
+    }
+    for(int i=ind;i<s.size();i++)
+    {
+        swap(s[i],s[ind]);
+        fun(s,ans,ind+1);
+    }
+}
+vector<string> findPermutations(string &s) {
+    // Write your code here.
+    vector<string> ans;
+    
+    fun(s,ans,0);
+    return ans;
+}
