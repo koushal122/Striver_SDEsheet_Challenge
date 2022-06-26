@@ -1,0 +1,26 @@
+import java.util.*;
+public class Solution {
+    public static int maximumActivities(List<Integer> start, List<Integer> end) {
+        //Write your code here
+        ArrayList<ArrayList<Integer>> arr=new ArrayList<>();
+        for(int i=0;i<start.size();i++)
+        {
+            ArrayList<Integer> temp=new ArrayList<>();
+            temp.add(start.get(i));
+            temp.add(end.get(i));
+            arr.add(new ArrayList<Integer>(temp));
+        }
+        Collections.sort(arr,(ArrayList<Integer> a,ArrayList<Integer> b)->{return a.get(1)-b.get(1);});
+        int cnt=1;
+        int end1=arr.get(0).get(1);
+        for(int i=1;i<arr.size();i++)
+        {
+            if(arr.get(i).get(0)>=end1)
+            {
+                cnt++;
+                end1=arr.get(i).get(1);
+            }
+        }
+        return cnt;
+    }
+}
