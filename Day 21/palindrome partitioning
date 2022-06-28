@@ -1,0 +1,42 @@
+import java.util.*;
+public class Solution {
+    public static boolean ispalin(String s,int si,int ei)
+    {
+        int i=si;
+        int j=ei;
+        while(i<j)
+        {
+            if(s.charAt(i)!=s.charAt(j))
+                return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+    public static void fun(String s,int se,int ed,List<List<String>> ans,ArrayList<String> tans)
+    {
+        if(se>=s.length()){
+            ans.add(new ArrayList<String>(tans));
+            return;
+        }
+        for(int i=se;i<=ed;i++)
+        {
+            if(ispalin(s,se,i))
+            {
+                String temp=s.substring(se,i+1);
+                tans.add(temp);
+                fun(s,i+1,ed,ans,tans);
+                tans.remove(tans.size()-1);
+            }
+        }
+    }
+    public static List<List<String>> partition(String s) {
+        // Write your code here.
+        List<List<String>> ans=new ArrayList<>();
+        ArrayList<String> tans=new ArrayList<>();
+        int n=s.length();
+        fun(s,0,s.length()-1,ans,tans);
+        return ans;
+            
+    }
+}
