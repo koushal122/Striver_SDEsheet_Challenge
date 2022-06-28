@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Solution {
+     public static void comp(int fact[],int n)
+    {
+        int ans=1;
+        for(int i=1;i<=n;i++)
+        {
+            ans=ans*i;
+            fact[i]=ans;
+        }
+    }
+    public static String kthPermutation(int n, int k) {
+        // Write your code here.
+        List<Integer> a=new ArrayList<>();
+        for(int i=1;i<=n;i++)
+            a.add(i);
+        String ans="";
+        int[] fact=new int[n+1];
+        comp(fact,n);k--;
+        while(a.size()!=1)
+        {
+            int total=fact[a.size()];
+            int div=total/a.size();
+            int ind=k/div;
+            int ele=a.get(ind);
+            ans=ans+String.valueOf(ele);
+            a.remove(ind);
+            k=k%div;
+        }
+        int ele=a.get(0);
+        ans=ans+String.valueOf(ele);
+        return ans;
+    }
+}
