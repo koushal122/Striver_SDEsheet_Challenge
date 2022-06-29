@@ -1,0 +1,40 @@
+import java.util.*;
+public class Solution {
+    public static boolean fun(int mat[][],int n,ArrayList<ArrayList<Integer>> ans,int[][] tans,int row,int col)
+    {
+        if(row==n-1&&col==n-1){
+            tans[row][col]=1;
+            ArrayList<Integer> temp=new ArrayList<>();
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                {
+                    temp.add(tans[i][j]);
+                }
+            }
+            ans.add(temp);
+            return true;
+        }
+        if(row<0||row>=n||col<0||col>=n)
+            return false;
+        else if(tans[row][col]==1)
+            return false;
+        else if(mat[row][col]==0)
+            return false;
+          tans[row][col]=1;
+          fun(mat,n,ans,tans,row,col+1);
+           fun(mat,n,ans,tans,row,col-1);
+           fun(mat,n,ans,tans,row+1,col);
+           fun(mat,n,ans,tans,row-1,col);
+           tans[row][col]=0;
+           return false;
+        
+    }
+    public static ArrayList<ArrayList<Integer>> ratInAMaze(int[][] maze, int n) {
+        // Write your code here.
+        ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+        int tans[][]=new int[n][n];
+        fun(maze,n,ans,tans,0,0);
+        return ans;
+    }
+}
