@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class Solution
+{
+	public static int getMedian(ArrayList<ArrayList<Integer>> mat)
+	{
+		// Write your code here.
+        int m=mat.size();
+        int n=mat.get(0).size();
+        int a[]=new int[m*n];
+        int k=0;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+                a[k++]=mat.get(i).get(j);
+        }
+        Arrays.sort(a);
+        int nt=m*n;
+        if(nt%2==0)
+        {
+            return (a[nt/2]+a[(nt/2)-1])/2;
+        }
+        else{
+            return a[nt/2];
+        }
+        
+	}
+}
