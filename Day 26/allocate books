@@ -1,0 +1,50 @@
+import java.util.*;
+public class Solution {
+    static boolean poss(int t[],int d,long val)
+    {
+        long nd=0;
+        long sum=0;
+        int i=0;
+        while(i<t.length)
+        {
+            if(t[i]>val)
+                return false;
+            sum+=t[i];
+            if(sum==val)
+            {
+                nd++;
+                sum=0;
+            }
+            else if(sum>val)
+            {
+                nd++;
+                sum=t[i];
+            }
+            i++;
+        }
+        if(sum!=0)
+            nd++;
+        if(nd<=d)
+            return true;
+        else return false;
+    }
+    public static long ayushGivesNinjatest(int n, int m, int[] time) {
+        // Write your code here.
+        long min=1;
+        long max=0;
+        for(int i=0;i<m;i++)
+            max+=time[i];
+        while(min<=max)
+        {
+            long mid=(min+max)/2;
+            if(poss(time,n,mid))
+            { 
+                max=mid-1;
+            }
+            else{
+                min=mid+1;
+            }
+        }
+        return min;
+    }
+}
