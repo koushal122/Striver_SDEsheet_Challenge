@@ -1,0 +1,42 @@
+import java.util.*;
+public class Solution {
+
+    static boolean possible(int pos[],int dis,int cp)
+    {
+        int per=1;
+        int ppos=pos[0];
+        for(int i=1;i<pos.length;i++)
+        {
+            if(pos[i]>=ppos+dis)
+            {
+                per++;
+                ppos=pos[i];
+            }
+        }
+        if(per>=cp)
+            return true;
+        else return false;
+    }
+    public static int chessTournament(int[] pos, int n,  int c) 
+	{
+        // Write your code here.    
+        Arrays.sort(pos);
+        int min=1;
+        int max=pos[n-1];
+        int ans=0;
+        while(min<=max)
+        {
+            int mid=(min+max)>>1;
+            if(possible(pos,mid,c))
+            {
+                ans=mid;
+                min=mid+1;
+            }
+            else{
+                max=mid-1;
+            }
+        }
+        return ans;
+    }
+
+}
