@@ -1,0 +1,66 @@
+import java.util.*;
+public class Solution {
+
+    // minHeap function which take size of Queries and Queries as Input.
+// Returns an array out outputs depending on the query.
+    static int[] minHeap(int n, int[][] q) {
+        // Write your code here.
+        ArrayList<Integer> ar=new ArrayList<>();
+        ArrayList<Integer> heap=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            if(q[i][0]==0)
+            {
+                heap.add(q[i][1]);
+                int ind=heap.size()-1;
+                while(ind>0)
+                {
+                    int parent=(ind-1)/2;
+                    if(heap.get(parent)>heap.get(ind)){
+                    int temp=heap.get(ind);
+                    heap.set(ind,heap.get(parent));
+                    heap.set(parent,temp);
+                    }
+                   else break;
+                    ind=parent;
+                }
+            }
+            else{
+                int temp=heap.get(0);
+                ar.add(temp);
+                int ind=0;
+                int newroot=heap.get(heap.size()-1);
+                heap.set(0,newroot);
+                heap.remove(heap.size()-1);
+                if(heap.size()>0){
+                 temp=newroot;
+                int leftc=heap.size()-1>=1?heap.get(1):Integer.MAX_VALUE;
+                int rightc=heap.size()-1>=2?heap.get(2):Integer.MAX_VALUE;
+                while((leftc!=Integer.MAX_VALUE||rightc!=Integer.MAX_VALUE)&&Math.min(leftc,rightc)<temp)
+                {
+                    if(leftc>rightc){
+                        int temp1=heap.get((2*ind)+2);
+                        heap.set((2*ind)+2,heap.get(ind));
+                        heap.set(ind,temp1);
+                        ind=(2*ind)+2;
+                    }else{
+                        int temp1=heap.get((2*ind)+1);
+                        heap.set((2*ind)+1,heap.get(ind));
+                        heap.set(ind,temp1);
+                        ind=(2*ind)+1;
+                    }
+                    leftc=heap.size()-1>=(2*ind)+1?heap.get((2*ind)+1):Integer.MAX_VALUE;
+                    rightc=heap.size()-1>=(2*ind)+2?heap.get((2*ind)+2):Integer.MAX_VALUE;
+                    temp=heap.get(ind);
+                }
+                }
+                
+            }
+        }
+        int arr[]=new int[ar.size()];
+        for(int i=0;i<ar.size();i++)
+            arr[i]=ar.get(i);
+        return arr;
+
+    }
+}
