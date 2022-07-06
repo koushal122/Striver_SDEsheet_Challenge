@@ -1,0 +1,27 @@
+import java.util.*;
+
+
+public class Solution {
+	public static ArrayList<Integer> kthSmallLarge(ArrayList<Integer> arr, int n, int k) {
+		//Write your code here
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0;i<n;i++)
+            pq.add(arr.get(i));
+        int mi=0,ma=0;
+        int cnt=0;
+        while(!pq.isEmpty())
+        {
+            int x=pq.remove();
+         
+            cnt++;
+            if(cnt==(n-k+1))
+                mi=x;
+            if(cnt==k)
+                ma=x;
+        }
+        ArrayList<Integer>  ans=new ArrayList<Integer>();
+        ans.add(ma);
+        ans.add(mi);
+        return ans;
+	}
+}
