@@ -1,0 +1,47 @@
+
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class Solution {
+
+	public static void findMedian(int arr[])  {
+        
+        
+        /* Your class should be named Solution
+		 * Don't write main().
+		 * Don't read input, it is passed as function argument.
+		 * Return output and don't print it.
+	 	 * Taking input and printing output is handled automatically.
+         
+        */
+        PriorityQueue<Integer> max = new PriorityQueue<Integer>(new Comparator<Integer>() {
+            public int compare(Integer lhs, Integer rhs) {
+                if (lhs < rhs) return +1;
+                if (lhs.equals(rhs)) return 0;
+                    return -1;
+            }
+        });
+         PriorityQueue<Integer> min = new PriorityQueue<Integer>();
+        for(int i=0;i<arr.length;i++)
+        {
+            if(max.isEmpty()||max.peek()>arr[i])
+                max.add(arr[i]);
+            else min.add(arr[i]);
+            if(max.size()>min.size()+1)
+                min.add(max.poll());
+            else if(max.size()<min.size())
+                max.add(min.poll());
+            if((max.size()+min.size())%2==0)
+            {
+                int ans=(max.peek()+min.peek())/2;
+                System.out.print(ans+" ");
+            }
+            else{
+                System.out.print(max.peek()+" ");
+            }
+        }
+    
+    }
+
+
+}
