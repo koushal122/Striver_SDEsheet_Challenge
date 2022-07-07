@@ -1,0 +1,40 @@
+import java.util.*;
+class pair{
+    int a=0;
+    int b=0;
+}
+public class Solution {
+
+	public static int[] KMostFrequent(int n, int k, int[] arr) {
+		// Write your code here.
+        PriorityQueue<pair> pq = new PriorityQueue<pair>(new Comparator<pair>() {
+                           public int compare(pair c, pair d) {
+                                         if (c.b < d.b) return +1;
+                                         if (c.b>d.b) return -1;
+                                         return 0;
+                             }
+                    });
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<n;i++)
+        {
+            if(hm.containsKey(arr[i]))
+            {
+                hm.put(arr[i],hm.get(arr[i])+1);
+            }
+            else hm.put(arr[i],1);
+        }
+        for (Map.Entry<Integer,Integer> entry : hm.entrySet()) 
+        {
+            pair temp=new pair();
+            temp.a=entry.getKey();
+            temp.b=entry.getValue();
+            pq.add(temp);
+        }
+        int ans[]=new int[k];
+        for(int i=0;i<k;i++)
+            ans[i]=pq.poll().a;
+        return ans;
+        
+	}
+
+}
