@@ -1,0 +1,17 @@
+import java.util.*;
+
+public class Solution 
+{
+	public static ArrayList<Integer> mergeKSortedArrays(ArrayList<ArrayList<Integer>> kA, int k)
+	{
+		// Write your code here.
+       ArrayList<Integer> ans=new ArrayList<>();
+        for(int i=0;i<k;i++)
+        {
+            for(int j=0;j<kA.get(i).size();j++)
+                ans.add(kA.get(i).get(j));
+        }
+        Collections.sort(ans);
+        return ans;
+	}
+}
