@@ -1,0 +1,43 @@
+import java.util.*;
+public class Stack {
+    int arr[];
+    int tind=-1;
+    Stack(int size)
+    {
+        arr=new int[size];
+    }
+    void push(int num) {
+        // Write your code here.
+        if(tind==arr.length-1)
+            return;
+        tind++;
+        arr[tind]=num;
+    }
+    int pop() {
+        // Write your code here.
+        if(tind==-1)
+            return -1;
+        int x=arr[tind];
+        tind--;
+        return x;
+    }
+    int top() {
+        // Write your code here.
+        if(tind==-1)
+            return -1;
+        int x=arr[tind];
+        return x;
+    }
+    int isEmpty() {
+        // Write your code here.
+        if(tind==-1)
+            return 1;
+        else return 0;
+    }
+    int isFull() {
+        // Write your code here.
+        if(tind==arr.length-1)
+            return 1;
+        else return 0;
+    }
+}
