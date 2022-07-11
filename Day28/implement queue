@@ -1,0 +1,59 @@
+
+class node{
+    int data;
+    node next;
+    node(int x)
+    {
+        data=x;
+        next=null;
+    }
+}
+public class Queue {
+    node head;
+    node tail;
+    Queue() {
+        // Implement the Constructor
+        head=null;
+        tail=null;
+    }
+
+    /*----------------- Public Functions of Queue -----------------*/
+
+    boolean isEmpty() {
+        // Implement the isEmpty() function
+        if(head==null)
+            return true;
+        else return false;
+    }
+
+    void enqueue(int data) {
+        // Implement the enqueue() function
+        if(head==null)
+        {
+            head=new node(data);
+            tail=head;
+        }else{
+            tail.next=new node(data);
+            tail=tail.next;
+        }
+    }
+
+    int dequeue() {
+        // Implement the dequeue() function
+        if(head==null)
+            return -1;
+        else{
+            int x=head.data;
+            head=head.next;
+            return x;
+        }
+    }
+
+    int front() {
+        // Implement the front() function
+        if(head==null)
+            return -1;
+        else return head.data;
+    }
+
+}
