@@ -1,0 +1,53 @@
+import java.util.*;
+public class LRUCache
+{
+    LinkedHashMap<Integer,Integer> ca=new LinkedHashMap<>();
+    LinkedHashMap<Integer,Integer> lru=new LinkedHashMap<>();
+    int size=0;
+    LRUCache(int capacity)
+    {
+        // Write your code here
+        size=capacity;
+    }
+
+    public int get(int key)
+    {
+        // Write your code here
+        if(ca.containsKey(key)){
+            int val=ca.get(key);
+            if(lru.containsKey(key)){
+                lru.remove(key);
+            }
+            lru.put(key,val);
+            return val;
+        }
+        else return -1;
+    }
+
+    public void put(int key, int value)
+    {
+        // Write your code here
+        if(ca.containsKey(key)){
+           ca.put(key,value);
+           lru.remove(key);
+           lru.put(key,value);
+        }
+        else if(ca.size()==size)
+        {
+             Set mapElement =lru.entrySet();
+             Iterator it=mapElement.iterator();
+             Map.Entry<Integer,Integer> et=(Map.Entry)it.next();
+             int key1=et.getKey();
+             int val=et.getValue();
+             ca.remove(key1);
+             lru.remove(key1);
+             ca.put(key,value);
+             lru.put(key,value);
+        }
+        else{
+             ca.put(key,value);
+            lru.put(key,value);
+        }
+    }
+}
+ 
