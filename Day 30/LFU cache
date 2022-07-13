@@ -1,0 +1,84 @@
+import java.util.*;
+public class LFUCache {
+    class node{
+        node left;
+        int keyd;
+        int vald;
+        node right;
+        node(int key,int val){
+            this.left=null;
+            keyd=key;
+            vald=val;
+            this.right=null;
+        }
+        node(){
+            this.left=null;
+            this.right=null;
+        }
+    }
+    HashMap<Integer,node> hm=new HashMap<>();
+    int size;
+    node start,end;
+	LFUCache(int capacity) {
+		// Write your code here.
+        size=capacity;
+        start=new node();
+        end=new node();
+        start.right=end;
+        end.left=start;
+	}
+    void deleteNode(node delnode)
+    {
+        delnode.left.right=delnode.right;
+        delnode.right.left=delnode.left;
+    }
+    node insert(int key,int val)
+    {
+        node temp=new node(key,val);
+        start.right.left=temp;
+        temp.right=start.right;
+        temp.left=start;
+        start.right=temp;
+        return temp;
+    }
+	int get(int key) {
+		// Write your code here.
+        int val=-1;
+        if(hm.containsKey(key)){
+            node keynode=hm.get(key);
+            hm.remove(key);
+            val=keynode.vald;
+            deleteNode(keynode);
+            node insertednode=insert(key,val);
+            hm.put(key,insertednode);
+        }
+        return val;
+	}
+    void deletenode()
+    {
+        int key=start.right.keyd;
+        hm.remove(key);
+        start.right.right.left=start;
+        start.right=start.right.right;
+    }
+	void put(int key, int value) {
+		// Write your code here.
+        if(hm.containsKey(key)){
+            node keynode=hm.get(key);
+            deleteNode(keynode);
+            hm.remove(key);
+            node insertednode=insert(key,value);
+            hm.put(key,insertednode);
+         }
+         else if(hm.size()==size)
+         {
+             deletenode();
+             node nins=insert(key,value);
+             hm.put(key,nins);
+         }
+         else{
+             node nins=insert(key,value);
+             hm.put(key,nins);
+         }
+	}
+}
