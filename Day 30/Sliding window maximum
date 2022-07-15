@@ -1,0 +1,32 @@
+
+import java.util.*;
+
+public class Solution 
+{
+
+	public static ArrayList<Integer> getMaximumOfSubarrays(ArrayList<Integer> nums, int k) 
+	{
+		//	  Write your code here.
+        ArrayList<Integer> ans=new ArrayList<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(new Comparator<Integer>() {
+                           public int compare(Integer lhs, Integer rhs) {
+                                         if (lhs < rhs) return +1;
+                                         if (lhs.equals(rhs)) return 0;
+                                         return -1;
+                             }
+                    });
+        for(int i=0;i<k;i++)
+        {
+            pq.add(nums.get(i));
+        }
+        for(int i=k;i<nums.size();i++)
+        {
+            ans.add(pq.peek());
+            pq.remove(nums.get(i-k));
+            pq.add(nums.get(i));
+        }
+        ans.add(pq.poll());
+        return ans;
+
+	}
+}
