@@ -1,0 +1,59 @@
+import java.util.*;
+public class Solution {
+
+    static class MinStack {
+        ArrayList<Integer> ar;
+        int min=Integer.MAX_VALUE;
+        MinStack() {
+            ar=new ArrayList<>();
+        }
+        void push(int num) {
+            if(num<min)
+            {
+                ar.add((2*num)-min);
+                min=num;
+            }
+            else{
+                ar.add(num);
+            }
+        }
+        int pop() {
+            if(ar.size()==0)
+                return -1;
+            else if(ar.get(ar.size()-1)<min)
+            {
+                int temp=min;
+                int x=(2*min)-ar.get(ar.size()-1);
+                min=x;
+                ar.remove(ar.size()-1);
+                return temp;
+            }
+            else{
+                int x=ar.get(ar.size()-1);
+                ar.remove(ar.size()-1);
+                return x;
+            }
+        }
+        int top() {
+            // Write your code here.
+            if(ar.size()==0)
+                return -1;
+            else if(ar.get(ar.size()-1)<min)
+            {
+                return min;
+            }
+            else{
+                return ar.get(ar.size()-1);
+            }
+        }
+
+        // Function to return minimum element of stack if it is present. Otherwise
+        // return -1.
+        int getMin() {
+            // Write your code here.
+            if(ar.size()==0)
+                return -1;
+            else return min;
+        }
+    }
+}
