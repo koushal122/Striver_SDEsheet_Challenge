@@ -1,0 +1,45 @@
+import java.util.*;
+public class Solution {	
+	public static String longestPalinSubstring(String str) {
+		boolean a[][]=new boolean[str.length()][str.length()];
+        for(int g=0;g<str.length();g++)
+        {
+            if(g==0)
+            {
+                for(int i=0;i<str.length();i++)
+                {
+                    a[i][i]=true;
+                }
+            }
+            else if(g==1)
+            {
+                for(int i=0,j=1;i<str.length()&&j<str.length();i++,j++)
+                {
+                    a[i][j]=str.charAt(i)==str.charAt(j)?true:false;
+                }
+            }
+            else{
+                for(int i=0,j=g;i<str.length()&&j<str.length();i++,j++)
+                {
+                    if(str.charAt(i)==str.charAt(j)&&a[i+1][j-1]==true)
+                        a[i][j]=true;
+                    else a[i][j]=false;
+                }
+            }
+        }
+        ArrayList<String> ans=new ArrayList<>();
+        boolean flag=true;
+        for(int i=str.length()-1;i>=0;i--)
+        {
+            flag=false;
+            for(int j=0,k=i;j<str.length()&&k<str.length();j++,k++)
+            {
+                if(a[j][k])
+                {
+                   return str.substring(j,k+1);
+                }
+            }
+        }
+        return " ";
+    }
+}
