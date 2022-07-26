@@ -1,0 +1,66 @@
+import java.util.*;
+/************************************************************
+
+	Following is the Binary Tree node structure:
+
+	class BinaryTreeNode<T> {
+	    T data;
+	    BinaryTreeNode<T> left;
+	    BinaryTreeNode<T> right;
+
+	    public BinaryTreeNode(T data) {
+	        this.data = data;
+	    }
+	}
+
+************************************************************/
+class pair{
+    BinaryTreeNode<Integer> node;
+    int num;
+    pair(BinaryTreeNode<Integer> btn,int num){
+        this.num=num;
+        node=btn;
+    }
+}
+public class Solution {
+    public static List<List<Integer>> getTreeTraversal(BinaryTreeNode<Integer> root) {
+        // Write your code here.
+        List<List<Integer>> ans=new ArrayList<>();
+        if(root==null)
+            return ans;
+        List<Integer> in=new ArrayList<Integer>();
+        List<Integer> pre=new ArrayList<Integer>();
+        List<Integer> pos=new ArrayList<Integer>();
+        Stack<pair> st=new Stack<>();
+        st.push(new pair(root,1));
+        while(!st.isEmpty())
+        {
+            
+            if(st.peek().num==1){
+                pair temp=st.pop();
+                pre.add(temp.node.data);
+                temp.num++;
+                st.push(temp);
+                if(temp.node.left!=null)
+                    st.push(new pair(temp.node.left,1));
+            }
+            if(st.peek().num==2){
+                pair temp=st.pop();
+                in.add(temp.node.data);
+                temp.num++;
+                st.push(temp);
+                if(temp.node.right!=null)
+                    st.push(new pair(temp.node.right,1));
+            }
+            if(st.peek().num==3){
+                pair temp=st.pop();
+                pos.add(temp.node.data);
+            }
+        }
+        ans.add(in);
+        ans.add(pre);
+        ans.add(pos);
+        return ans;
+        
+    }
+}
