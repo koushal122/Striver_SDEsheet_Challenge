@@ -1,0 +1,52 @@
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.ArrayList;
+
+/*********************************************
+
+    class BinaryTreeNode {
+        int val;
+        BinaryTreeNode left;
+        BinaryTreeNode right;
+
+        BinaryTreeNode(int val) {
+            this.val = val;
+            this.left = null;
+            this.right = null;
+        }
+    }
+*********************************************/
+
+class pair{
+    int level;
+    int val;
+    pair(int val,int level){
+        this.val=val;
+        this.level=level;
+    }
+}
+
+public class Solution {
+    static void fun(BinaryTreeNode root,int ind,Map<Integer,pair> hm,int level){
+        if(root!=null){
+            if(hm.containsKey(ind))
+            {
+                pair temp=hm.get(ind);
+                if(temp.level<=level)
+                    hm.put(ind,new pair(root.val,level));
+            }
+            else hm.put(ind,new pair(root.val,level));
+            fun(root.left,ind-1,hm,level+1);
+            fun(root.right,ind+1,hm,level+1);
+        }
+    }
+    public static ArrayList<Integer> bottomView(BinaryTreeNode root) {
+         // Write your code here. 
+        ArrayList<Integer> ans=new ArrayList<>();
+        Map<Integer,pair> hm=new TreeMap<>();
+        fun(root,0,hm,0);
+        for (Map.Entry<Integer,pair> entry : hm.entrySet())
+            ans.add(entry.getValue().val);
+        return ans;
+        }
+}
